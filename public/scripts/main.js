@@ -76,15 +76,30 @@ function resetHighlight(e) {
 }
 
 
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
+function mouseclick(e) {
+    var layer = e.target;
+    var name = layer.feature.properties.name;
+    var paragraph = text(name);
+    layer.bindPopup('<h1>'+name+'</h1>'+ '<p1>' + paragraph + '</p1>');
+}
+
+function text(name){
+    return name === "Pueblo" ?'The Pueblo San Diego watershed lies within the San Diego Bay WMA and is the smallest of the three San Diego Bay WMA watersheds, covering just over 36,000 acres. It is comprised of three hydrologic areas: Point Loma, San Diego Mesa, and National City . Major water bodies include Chollas Creek, Paleta Creek, and San Diego Bay.' :
+           name === "Tijuana" ? 'The Tijuana River Watershed covers 1,750 square miles – three-fourths lies in Mexico and includes the cities of Tijuana and Tecate. We can all do our part to protect our watershed by not allowing harmful pollutants like motor oil, fertilizer, and plastic trash to enter storm drains and flow into the estuary and then the sea.':
+           name === "Otay" ? 'The Otay watershed comprises approximately 98,500 acres. It consists of three hydrologic areas: Coronado, Otay, and Dulzura. Major water bodies include the Upper and Lower Otay Reservoirs, Otay River, and San Diego Bay . Nearly 70 percent of the watershed is unincorporated with the remaining portions divided between the Port of San Diego, Chula Vista, Coronado, Imperial Beach, National City, and San Diego.':
+           name === "SweetWater" ?'The Sweetwater watershed is the largest of the three watersheds that border San Diego Bay, encompassing over 148,000 acres. The watershed includes three hydrologic areas: Lower Sweetwater, Middle Sweetwater, and Upper Sweetwater . Major water bodies within the Sweetwater watershed include the Sweetwater River , Sweetwater Reservoir, Loveland Reservoir, and San Diego Bay .' :
+           name === "LosPenasquitos" ? 'The Los Peñasquitos Watershed Management Area (WMA) encompasses a land area of 94 square miles, making it the second smallest WMA in San Diego County. It lies in the central portion of San Diego County and neighbors the San Dieguito River Watershed to the north and the Mission Bay/La Jolla and San Diego River WMAs to the south.':
+           name === "SanDiego" ?'The San Diego River Watershed encompasses a land area of 434 square miles, making it the second largest watershed management area (WMA) located in San Diego County. It lies in the central portion of the County and neighbors Los Penasquitos and San Dieguito River Watersheds to the north and San Diego Bay WMA to the south.' :
+           name === "SanDieguito" ? 'The San Dieguito River Watershed Management Area (WMA) is a drainage area that encompasses approximately 345 square miles, including portions of the Cities of Del Mar, Escondido, Poway, San Diego, and Solana Beach, and unincorporated areas of San Diego County. ':
+           name === "Carlsbad" ? 'The Carlsbad Watershed Management Area (WMA) is comprised of six (6) distinct hydrologic areas covering a land area of 211 square miles. The WMA extends from the headwaters above Lake Wohlford in the east to the Pacific Ocean in the west, and borders San Luis Rey and San Dieguito Watersheds to the north and south, respectively.':
+           'error';
 }
 
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: mouseclick
     });
 }
 
