@@ -50,8 +50,8 @@ function setColorName(name){
 
 function style() {
     return {
-        weight: 3,
-        opacity: .9,
+        weight: 2.5,
+        opacity: 1,
         color: 'black',
         fillOpacity: 0
     };
@@ -63,7 +63,7 @@ function highlightFeature(e) {
         weight: 5,
         color: setColorName(layer.feature.properties.name),
         dashArray: '',
-        fillOpacity: 0.6
+        fillOpacity: 0.5
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -79,11 +79,13 @@ function resetHighlight(e) {
 function mouseclick(e) {
     var layer = e.target;
     var name = layer.feature.properties.name;
-    var paragraph = text(name);
-    layer.bindPopup('<h1>'+name+'</h1>'+ '<p1>' + paragraph + '</p1>');
+    var paragraph = summary(name);
+    var display = layer.feature.properties.display;
+    layer.bindPopup('<div class="popup">' + '<h1>'+display+'</h1>'+ '<p1>' + paragraph + '</p1>' + '<img src="/test.png" alt="Graph about watersheds" class="graph">'+'</img>'+ '</div>',  {maxHeight: 500});
 }
 
-function text(name){
+
+function summary(name){
     return name === "Pueblo" ?'The Pueblo San Diego watershed lies within the San Diego Bay WMA and is the smallest of the three San Diego Bay WMA watersheds, covering just over 36,000 acres. It is comprised of three hydrologic areas: Point Loma, San Diego Mesa, and National City . Major water bodies include Chollas Creek, Paleta Creek, and San Diego Bay.' :
            name === "Tijuana" ? 'The Tijuana River Watershed covers 1,750 square miles – three-fourths lies in Mexico and includes the cities of Tijuana and Tecate. We can all do our part to protect our watershed by not allowing harmful pollutants like motor oil, fertilizer, and plastic trash to enter storm drains and flow into the estuary and then the sea.':
            name === "Otay" ? 'The Otay watershed comprises approximately 98,500 acres. It consists of three hydrologic areas: Coronado, Otay, and Dulzura. Major water bodies include the Upper and Lower Otay Reservoirs, Otay River, and San Diego Bay . Nearly 70 percent of the watershed is unincorporated with the remaining portions divided between the Port of San Diego, Chula Vista, Coronado, Imperial Beach, National City, and San Diego.':

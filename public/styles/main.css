@@ -8,3 +8,16 @@ body {
   bottom:0; 
   width:100%; 
 }
+
+.graph{
+  display:block; 
+  height:200px;
+  width:300px;
+
+}
+
+.leaflet-popup-scrolled {
+  overflow: auto;
+  border-bottom: 0;
+  border-top: 0;
+}
