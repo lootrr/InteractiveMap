@@ -1,2 +1,1 @@
 # InteractiveMap
-Functional Map
